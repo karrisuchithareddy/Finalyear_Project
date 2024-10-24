@@ -1,0 +1,272 @@
+{% include 'nav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            padding: 0 10px;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+        }
+
+        .wrapper {
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            margin: 50px auto;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125);
+            padding: 30px;
+        }
+
+        .wrapper .title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #0bf3efe5;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .wrapper .form {
+            width: 100%;
+        }
+
+        .wrapper .form .inputfield {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .wrapper .form .inputfield label {
+            width: 200px;
+            color: #757575;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .wrapper .form .inputfield .input,
+        .wrapper .form .inputfield .textarea {
+            width: 100%;
+            outline: none;
+            border: 1px solid #d5dbd9;
+            font-size: 15px;
+            padding: 8px 10px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper .form .inputfield .textarea {
+            width: 100%;
+            height: 125px;
+            resize: none;
+        }
+
+        .wrapper .form .inputfield .custom_select {
+            position: relative;
+            width: 100%;
+            height: 37px;
+        }
+
+        .wrapper .form .inputfield .custom_select:before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            right: 10px;
+            border: 8px solid;
+            border-color: #d5dbd9 transparent transparent transparent;
+            pointer-events: none;
+        }
+
+        .wrapper .form .inputfield .custom_select select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            outline: none;
+            width: 100%;
+            height: 100%;
+            border: 0px;
+            padding: 8px 10px;
+            font-size: 15px;
+            border: 1px solid #d5dbd9;
+            border-radius: 3px;
+        }
+
+
+        .wrapper .form .inputfield .input:focus,
+        .wrapper .form .inputfield .textarea:focus,
+        .wrapper .form .inputfield .custom_select select:focus {
+            border: 1px solid #0bf3efe5;
+        }
+
+        .wrapper .form .inputfield p {
+            font-size: 14px;
+            color: #757575;
+        }
+
+        .wrapper .form .inputfield .check {
+            width: 15px;
+            height: 15px;
+            position: relative;
+            display: block;
+            cursor: pointer;
+        }
+
+        .wrapper .form .inputfield .check input[type="checkbox"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .wrapper .form .inputfield .check .checkmark {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #0bf3efe5;
+            display: block;
+            position: relative;
+        }
+
+        .wrapper .form .inputfield .check .checkmark:before {
+            content: "";
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            width: 5px;
+            height: 2px;
+            border: 2px solid;
+            border-color: transparent transparent #fff #fff;
+            transform: rotate(-45deg);
+            display: none;
+        }
+
+        .wrapper .form .inputfield .check input[type="checkbox"]:checked~.checkmark {
+            background: #0bf3efe5;
+        }
+
+        .wrapper .form .inputfield .check input[type="checkbox"]:checked~.checkmark:before {
+            display: block;
+        }
+
+        .wrapper .form .inputfield .btn {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 15px;
+            border: 0px;
+            background: #0bf3efe5;
+            ;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .wrapper .form .inputfield .btn:hover {
+            background: #0bf3efe5;
+            ;
+        }
+
+        .wrapper .form .inputfield:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width:420px) {
+            .wrapper .form .inputfield {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .wrapper .form .inputfield label {
+                margin-bottom: 5px;
+            }
+
+            .wrapper .form .inputfield.terms {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+
+<body background="static/pbg.jpg">
+    <form action="{{url_for('pre')}}" method="POST">
+        <div class="wrapper">
+            <div class="title">
+                CROP PREDICTION
+            </div>
+            <div class="form">
+                <div class="inputfield">
+                    <label>Crop</label>
+                  <select name="crop" class="input" id="">
+                    <option value="">---select the crop you have----</option>
+                    <option value="">cotton</option>
+                    <option value="">blackgram</option>
+                    <option value="">rice</option>
+                    <option value="">tomato</option>
+                  </select>
+                </div>
+                <div class="inputfield">
+                    <label>soil mouisture level</label>
+                    <select name="sm" class="input" id="">
+                        <option value="">---select moisture level----</option>
+                        <option value="">below 360</option>
+                        <option value="">360 to 400</option>
+                        <option value="">500 to 600</option>
+                        <option value="">above 600</option>
+                      </select>
+                </div>
+               
+                <div class="inputfield">
+                    <label>Temparature</label>
+                    <select name="temp" class="input" id="">
+                        <option value="">---select temparature----</option>
+                        <option value="">below 25</option>
+                        <option value="">25 to 30</option>
+                        <option value="">30 to 40</option>
+                        <option value="">above 40</option>
+                      </select>
+                </div>
+                <div class="inputfield">
+                    <label>Humidity</label>
+                    <select name="hum" class="input" id="">
+                        <option value="">---select humidity----</option>
+                        <option value="">below 25</option>
+                        <option value="">25 to 30</option>
+                        <option value="">30 to 40</option>
+                        <option value="">above 40</option>
+                      </select>
+                </div>
+                    
+                </div>
+                <div class="inputfield">
+                    <label>Rain-fall</label>
+                    <select name="rain" class="input" id="">
+                        <option value="">---select rain fall range----</option>
+                        <option value="">below 180</option>
+                        <option value="">180 to 320</option>
+                        <option value="">320 to 420</option>
+                        <option value="">above 450</option>
+                      </select>
+                </div>
+                </div>
+                <div class="inputfield">
+                    <input type="submit" value="Register" class="btn">
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
